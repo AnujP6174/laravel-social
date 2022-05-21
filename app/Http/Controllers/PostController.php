@@ -91,11 +91,11 @@ class PostController extends Controller
         $user = Like::updateOrCreate(['post_id' => $post->id, 'user_id' => Auth::user()->id], [
             'like' => $is_like
         ]);
-        $like = new Like();
-        $like->like = $is_like;
-        $like->user_id = Auth::user()->id;
-        $like->post_id = $post->id;
-        $like->save();
+        // $like = new Like();
+        // $like->like = $is_like;
+        // $like->user_id = Auth::user()->id;
+        // $like->post_id = $post->id;
+        // $like->save();
         return true;
         if ($like) {
             $already_like = $like->like;
@@ -117,6 +117,5 @@ class PostController extends Controller
         }
         return null;
     }
-
     // post like ends
 }

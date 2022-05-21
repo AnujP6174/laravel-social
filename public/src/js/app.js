@@ -1,9 +1,10 @@
+// update starts
 var postId = 0;
 var postBodyElement = null;
 $(document).ready(function () {
     $(".edit").click(function (event) {
         event.preventDefault();
-        postBodyElement = event.target.parentNode.parentNode.childNodes[1];
+        postBodyElement = event.target.parentNode.parentNode.childNodes[3];
         var postBody = postBodyElement.textContent;
         postId = event.target.parentNode.parentNode.dataset["anuj"];
         $("#body").val(postBody);
@@ -26,11 +27,12 @@ $(document).ready(function () {
         });
     });
 });
+// update ends
 
 // Like dislike parts starts
 $(document).ready(function () {
     $(".like").click(function (event) {
-        event.preventDefault();
+        // event.preventDefault();
         postId = event.target.parentNode.parentNode.dataset["anuj"];
         var isLike = event.target.previousElementSibling == null;
         console.log(isLike);
@@ -48,7 +50,7 @@ $(document).ready(function () {
                     ? "You have already liked this Post"
                     : "Like"
                 : event.target.innerText == "Dislike"
-                ? "You don't like this post"
+                ? "You disliked this post"
                 : "Dislike";
             if (isLike) {
                 event.target.nextElementSibling.innerText = "Dislike";
@@ -58,3 +60,4 @@ $(document).ready(function () {
         });
     });
 });
+// like dislike ends
