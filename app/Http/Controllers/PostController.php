@@ -81,13 +81,12 @@ class PostController extends Controller
         if (!$post) {
             return null;
         }
-        //$user = User::with('liked')->where('id', Auth::user()->id)->first();
+        // $user = User::with('liked')->where('id', Auth::user()->id)->first();
         // return $user;
         // $user = Auth::user();
-        // exit();
-        //$like =  User::has('liked')->where('post_id', $post_id)->first();
+        // $like =  User::has('liked')->where('post_id', $post_id)->first();
         $like =  Like::select('*')->where('post_id', $post_id)->where('user_id', Auth::user()->id)->first();
-        //dd($like);
+        // dd($like);
         $user = Like::updateOrCreate(['post_id' => $post->id, 'user_id' => Auth::user()->id], [
             'like' => $is_like
         ]);
