@@ -52,7 +52,6 @@ class PostController extends Controller
     // POST UPDATE STARTS
     public function updatePost(Request $request)
     {
-        // $post = Post::where('id', $postid)->first();
         $request->validate([
             'body' => 'required | max:1000'
         ]);
@@ -62,10 +61,6 @@ class PostController extends Controller
         }
         $post->body = $request['body'];
         $post->update();
-        // $updatemessage = 'There was an error while updating';
-        // if ($request->user()->posts()->save($post)) {
-        //     $updatemessage = 'Post was updated successfully';
-        // }
         return response()->json(['new-body' => $post->body], 200);
         // return redirect()->route('dashboard')->with(json(['new-body' => $post->body], 200]));
     }
@@ -74,47 +69,35 @@ class PostController extends Controller
     // post like starts
     public function postLike(Request $request)
     {
-        $post_id = $request['postId'];
-        $is_like = $request['isLike'] === 'true';
-        $update = false;
-        $post = Post::find($post_id);
-        if (!$post) {
-            return null;
-        }
-        // $user = User::with('liked')->where('id', Auth::user()->id)->first();
-        // return $user;
-        // $user = Auth::user();
-        // $like =  User::has('liked')->where('post_id', $post_id)->first();
-        $like =  Like::select('*')->where('post_id', $post_id)->where('user_id', Auth::user()->id)->first();
-        // dd($like);
-        $user = Like::updateOrCreate(['post_id' => $post->id, 'user_id' => Auth::user()->id], [
-            'like' => $is_like
-        ]);
-        // $like = new Like();
+        // $post_id = $request['postId'];
+        // $is_like = $request['isLike'] === 'true';
+        // $update = false;
+        // $post = Post::find($post_id);
+        // if (!$post) {
+        //     return null;
+        // }
+        // $like =  Like::select('*')->where('post_id', $post_id)->where('user_id', Auth::user()->id)->first();
+        // $user = Like::updateOrCreate(['post_id' => $post->id, 'user_id' => Auth::user()->id], ['like' => $is_like]);
+        // return true;
+        // if ($like) {
+        //     $already_like = $like->like;
+        //     $update = true;
+        //     if ($already_like == $is_like) {
+        //         $like->delete();
+        //         return null;
+        //     }
+        // } else {
+        //     $like = new Like();
+        // }
         // $like->like = $is_like;
-        // $like->user_id = Auth::user()->id;
+        // $like->user_id = $user->id;
         // $like->post_id = $post->id;
-        // $like->save();
-        return true;
-        if ($like) {
-            $already_like = $like->like;
-            $update = true;
-            if ($already_like == $is_like) {
-                $like->delete();
-                return null;
-            }
-        } else {
-            $like = new Like();
-        }
-        $like->like = $is_like;
-        $like->user_id = $user->id;
-        $like->post_id = $post->id;
-        if ($update) {
-            $like->update();
-        } else {
-            $like->save();
-        }
-        return null;
+        // if ($update) {
+        //     $like->update();
+        // } else {
+        //     $like->save();
+        // }
+        // return null;
     }
     // post like ends
 }

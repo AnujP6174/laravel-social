@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
-</head>
-<body>
-
 @extends('layouts.master')
 @include('includes.message-block')
 @section('content')
@@ -41,12 +31,11 @@
                         <small>Posted by {{$post->user->name}} on {{$post->updated_at->format('d/m/Y h:i:s A')}}</small>
                     </div>
                     <div class="interaction">
-                        <a href="" class="btn btn-sm btn-primary like">{{Auth::user()->liked()->where('post_id',$post->id)->first() ? Auth::user()->liked()->where('post_id',$post->id)->first()->like == 1 ? 'You liked this Post':'Like': 'Like'}}</a>
+                        {{-- <a href="" class="btn btn-sm btn-primary like">{{Auth::user()->liked()->where('post_id',$post->id)->first() ? Auth::user()->liked()->where('post_id',$post->id)->first()->like == 1 ? 'You liked this Post':'Like': 'Like'}}</a>
                          |
-                        <a href="" class="btn btn-secondary btn-sm like">{{Auth::user()->liked()->where('post_id',$post->id)->first() ? Auth::user()->liked()->where('post_id',$post->id)->first()->like == 0 ? 'You disliked this Post':'Dislike': 'Dislike'}}</a>
+                        <a href="" class="btn btn-secondary btn-sm like">{{Auth::user()->liked()->where('post_id',$post->id)->first() ? Auth::user()->liked()->where('post_id',$post->id)->first()->like == 0 ? 'You disliked this Post':'Dislike': 'Dislike'}}</a> --}}
                         @if (Auth::user()==$post->user)
-                            |
-                            <a href="" class="btn btn-sm btn-success edit">Edit</a> |
+                            |<a href="" class="btn btn-sm btn-success edit">Edit</a> |
                             <a href="{{route('post.delete',['post_id'=>$post->id])}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                         @endif
                     </div>
@@ -67,7 +56,7 @@
             <div class="modal-body">
               <form method="POST" id="posteditform">
                   @csrf
-                  {{-- <input type="hidden" id="id" name="id" /> --}}
+                  {{-- <input type="hidden" id="id" name="id"> --}}
                   <div class="form-group">
                       <label for="body">Edit the Post</label>
                       <textarea class="form-control" name="body" id="body" rows="5"></textarea>
@@ -80,19 +69,8 @@
             </div>
           </div>
         </div>
-      </div>
+    </div>
       {{-- edit modal ends --}}
-
-
-{{-- <script>
-    function posteditfunction(id) { 
-        $.get('post/'+id, function(post){
-            $("#edit").val(post_id);
-            $("#posteditmodal").modal("hide");
-        })
-     }
-</script> --}}
-
 @endsection
 @section('pagejs')
     <script>
@@ -101,5 +79,3 @@
         var urlLike = '{{ route('like') }}';
     </script>
 @endsection
-</body>
-</html>

@@ -1,21 +1,23 @@
-<?php
+    <?php
 
-namespace App\Models;
+    // namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+    // use App\Models\Post;
+    // use App\Models\User;
+    // use Illuminate\Database\Eloquent\Factories\HasFactory;
+    // use Illuminate\Database\Eloquent\Model;
 
-class Like extends Model
-{
-    use HasFactory;
-    protected $fillable = ['user_id', 'post_id', 'like'];
-    public function user()
+    // class Like extends Model
     {
-        return $this->belongsTo(User::class);
-    }
+        // use HasFactory;
+        // protected $fillable = ['user_id', 'post_id', 'like'];
+        // public function user()
+        // {
+        //     return $this->belongsTo(User::class);
+        // }
 
-    public function post()
-    {
-        return $this->belongsTo(Post::class);
+        // public function post()
+        // {
+        //     return $this->belongsTo(Post::class);
+        // }
     }
-}
